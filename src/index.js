@@ -1,12 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./reducers";
+
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+let initialStore = {};
+const store = createStore(
+  rootReducer,
+  initialStore,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 ReactDOM.render(
-  //<h1>it is {new Date().toLocaleDateString()}</h1>,
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
 
